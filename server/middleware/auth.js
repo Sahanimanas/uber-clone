@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken')
 const usermodel = require('../models/user_model')
 const blacklistmodel = require('../models/blacklist.model')
-~
+
 const auth = async (req,res,next) =>{
  const token = req.cookies.token || req.headers.authorization.split(' ')[1];
  if(!token){
