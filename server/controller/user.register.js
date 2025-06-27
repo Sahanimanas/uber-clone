@@ -71,7 +71,7 @@ const userprofile = (req,res,next) =>{
 }
 
 const logout = async(req,res,next) =>{
-        const token = req.cookies.token || req.headers.authorization.split(' ')[1];
+      const token = req.cookies.token || req.headers.authorization;
        res.clearCookie('token');
        const toke = await blacklistmodel.create({'token':token})
        res.status(201).json({message:"logout successfull"})

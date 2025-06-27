@@ -2,6 +2,9 @@ const express = require("express");
 const { body, validationResult } = require("express-validator");
 const captainmodel = require("../models/captain.model")
 const bcrypt = require("bcrypt");
+const jwt = require('jsonwebtoken')
+require('dotenv').config
+
 const registerCaptain = async (req, res,next) => {
   try {
     // console.log( "request body",req.body)
@@ -57,4 +60,38 @@ const registerCaptain = async (req, res,next) => {
   }
 };
 
-module.exports = {registerCaptain};
+const loginCaptain = async (req, res, next) => {
+  try { 
+    const errors = validationResult(req);
+   if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+    const {email,password} =  req.body;
+    const user = await captainmodel.findOne({email}).select('+password');
+    if(!user){
+      return res.status(404).json({message:"user not found"})
+    }
+
+   
+    const checkpass=  await bcrypt.compare(password, user.password);
+    if(!checkpass){
+      return res.status(401).json({message:"unauthorised access"});
+    }
+
+    const token = jwt.sign({id:user._id},process.env.JWT_SECRET);
+    res.cookie('token',token)
+    if(!token){
+      return res.status(500).json({message:"Token error"})
+    }
+    return res.status(200).json({
+      token,user
+    })
+
+  }catch(err) {
+    res.status(500).json({message:"internal server error"})
+  }
+
+}
+
+
+module.exports = {registerCaptain,loginCaptain};
