@@ -5,12 +5,14 @@ const auth = require('../middleware/auth')
 const router = express.Router()
 const {registeruser,loginuser,logout,userprofile} = require('../controller/user.register')
 
-router.post('/register',[
+router.post('/register',
+    [
     body('email').isEmail().withMessage('invalid email'),
     body('fullname.firstname').isLength({min:3}).withMessage("must be length 3"),
     body('fullname.lastname').isLength({min:3}).withMessage("must be length 3"),
     body('password').isLength({min:6}).withMessage('minimum of 6 length'),
-],registeruser)
+],
+registeruser)
 
 
 router.post('/login',[

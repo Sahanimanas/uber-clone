@@ -1,22 +1,34 @@
-import React, { useState } from "react";
+import axios from "axios";
+import React, { useState, useContext } from "react";
 import { Link } from "react-router";
-
+import { UserDataContext } from "../context/usercontext";
+import { useNavigate } from "react-router";
 const Userlogin = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [user, setUser] = useState({});
-    
-const submitHandler =(e)=>{
-  e.preventDefault();
-  setUser({
-    email:email,
-    password:password}
-  )
+  const [userdata, setUserdata] = useState({});
+  const { user, setUser } = useContext(UserDataContext);
+  const navigate = useNavigate();
+  const submitHandler = async (e) => {
+    e.preventDefault();
+    setUserdata({
+      email: email,
+      password: password,
+    });
 
-  setEmail('')
-  setPassword('')
-}
+    setEmail("");
+    setPassword("");
 
+    const response = await axios.post(
+      `${import.meta.env.VITE_BASE_URL}/users/login`,
+      userdata
+    );
+    if (response.status === 201) {
+      localStorage.setItem('token', response.data.token);
+      setUser(response.data.user);
+      navigate('/');
+    }
+  }
 
   return (
     <div className=" p-7 flex flex-col justify-between h-screen">
@@ -27,9 +39,11 @@ const submitHandler =(e)=>{
           alt=""
         />
 
-        <form onSubmit={(e)=>{
-          submitHandler(e)
-        }}>
+        <form
+          onSubmit={(e) => {
+            submitHandler(e);
+          }}
+        >
           <h3 className="text-lg font-medium mb-2">What's your email</h3>
           <input
             required
