@@ -4,12 +4,12 @@ const Userlogout = () => {
     const token = localStorage.getItem('token');
     const navigate = useNavigate();
 
-    axios.post('/users/logout',{
+    axios.post(`${import.meta.env.VITE_BASE_URL}/users/logout`,{
         headers:{
             Authorization: `Bearer ${token}`
         }
     }).then((response)=>{
-        if(response == 200){
+        if(response.status == 200){
             navigate('/user-login');
             localStorage.removeItem('token')
         }

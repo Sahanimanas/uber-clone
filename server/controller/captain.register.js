@@ -13,7 +13,7 @@ const registerCaptain = async (req, res,next) => {
       return res.status(400).json({ errors: errors.array() });
     }
     const { email, fullname, password, vehicle, status } = req.body;
-    if (!email || !fullname || !password || !vehicle || !status) {
+    if (!email || !fullname || !password || !vehicle) {
       return res.status(400).json({ message: "All fields are required" });
     }
 
@@ -26,6 +26,7 @@ const registerCaptain = async (req, res,next) => {
     if (!hashedpassword) {
       return res.status(500).json({ message: "Failed to hash password" })
     }
+    
    const newCaptain = await captainmodel.create({
   fullname: {
     firstname: fullname.firstname,
@@ -34,14 +35,14 @@ const registerCaptain = async (req, res,next) => {
   email,
   password: hashedpassword,
   vehicle: {
-    vehicleType: vehicle.vehicleType,
+    vehicleType: vehicle.type,
     capacity: vehicle.capacity,
     plate: vehicle.plate,
     color: vehicle.color
   },
   status
 });
-
+ const token = jwt.sign({ _id: newCaptain._id }, process.env.JWT_SECRET);
     if (!newCaptain) {
       return res.status(500).json({ message: "Failed to register captain" });
     }   
@@ -53,6 +54,7 @@ const registerCaptain = async (req, res,next) => {
        vehicle ,
         status
       },
+      token
     });
   } catch (error) {
     console.error("Error registering captain:", error);

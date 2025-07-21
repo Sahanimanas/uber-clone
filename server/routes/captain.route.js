@@ -14,7 +14,7 @@ router.post('/register',
     body('vehicle.color').isLength({ min: 3 }).withMessage('must be valid color'),
     body('vehicle.plate').isLength({ min: 3 }).withMessage('must be valid plate'),
      body('vehicle.capacity').isInt({ min: 1 }).withMessage('must be at least 1'),
-    body('vehicle.vehicleType').isIn(['car', 'fourwheeler', 'auto']).withMessage('must be one of car, fourwheeler, auto')
+    body('vehicle.type').isIn(['car', 'fourwheeler', 'auto']).withMessage('must be one of car, fourwheeler, auto')
 ],
  registerCaptain);
 

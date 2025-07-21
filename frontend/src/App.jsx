@@ -8,6 +8,9 @@ import  Captainsignup  from "./components/captainsignup";
 import Userlogin from "./components/userlogin";
 import Userprotected from "./components/Userprotected";
 import Userlogout from "./components/userlogout";
+import Captainlogout from "./components/Captainlogout";
+import Captainhome from "./components/Captainhome";
+import Captainprotect from "./components/Captainprotect";
 
 const App = () => {
   return (
@@ -24,7 +27,12 @@ const App = () => {
           <Route path="/users/logout" element={
           <Userprotected> <Userlogout/> </Userprotected>
          } />
-
+        <Route path="/captain/logout" element={
+          <Userprotected> <Captainlogout/> </Userprotected>
+         } />
+        <Route path="/captain-home" element={
+          <Captainprotect> <Captainhome/> </Captainprotect>
+         } />
       </Routes>
 
   );
