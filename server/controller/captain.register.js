@@ -42,7 +42,7 @@ const registerCaptain = async (req, res,next) => {
   },
   status
 });
- const token = jwt.sign({ _id: newCaptain._id }, process.env.JWT_SECRET);
+ const token = jwt.sign({ id: newCaptain._id }, process.env.JWT_SECRET);
     if (!newCaptain) {
       return res.status(500).json({ message: "Failed to register captain" });
     }   
