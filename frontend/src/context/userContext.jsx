@@ -5,7 +5,7 @@ const UserDataContext = createContext();
 const UserContext = ({children}) => {
 
 const [user,setUser] = useState({
-    fullname:{
+    fullname:{                         
         firstname:'',
         lastname:''
     },

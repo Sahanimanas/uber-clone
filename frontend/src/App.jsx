@@ -1,16 +1,16 @@
 import React from "react";
 import { Route, Routes } from "react-router";
-import Start from "./components/Start";
-import Home from "./components/Home"
-import Usersignup from "./components/usersignup";
-import Captainlogin from "./components/captainlogin";
-import  Captainsignup  from "./components/captainsignup";
-import Userlogin from "./components/userlogin";
-import Userprotected from "./components/Userprotected";
-import Userlogout from "./components/userlogout";
-import Captainlogout from "./components/Captainlogout";
-import Captainhome from "./components/Captainhome";
-import Captainprotect from "./components/Captainprotect";
+import Start from "./pages/Start";
+import Home from "./pages/Home"
+import Usersignup from "./pages/Usersignup";
+import Captainlogin from "./pages/Captainlogin";
+import  Captainsignup from "./pages/Captainsignup";
+import Userlogin from "./pages/Userlogin";
+import Userprotected from "./pages/Userprotected";
+import Userlogout from "./pages/Userlogout";
+import Captainlogout from "./pages/Captainlogout";
+import Captainhome from "./pages/Captainhome";
+import Captainprotect from "./pages/Captainprotect";
 
 const App = () => {
   return (

@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, { useEffect,useContext } from 'react'
 import { useNavigate } from 'react-router';
 import { CaptainDatacontext } from '../context/Captaincontext';
+import 'remixicon/fonts/remixicon.css'
 
 const Captainprotect = ({children}) => {
    const token = localStorage.getItem('token');
