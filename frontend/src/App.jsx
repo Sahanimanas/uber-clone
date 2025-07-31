@@ -11,17 +11,19 @@ import Userlogout from "./pages/Userlogout";
 import Captainlogout from "./pages/Captainlogout";
 import Captainhome from "./pages/Captainhome";
 import Captainprotect from "./pages/Captainprotect";
+import Riding from "./pages/Riding";
 
 const App = () => {
   return (
 
       <Routes>
-        <Route path="/start" element={<Start/>} />
+        <Route path="/" element={<Start/>} />
         <Route path="/user-login" element={<Userlogin/>} />
+        <Route path="/riding" element={<Riding/>} />
         <Route path="/user-signup" element={<Usersignup/>} />
         <Route path="/captain-login" element={<Captainlogin/>} />
         <Route path="/captain-signup" element={<Captainsignup/>} />
-        <Route path="/" element={
+        <Route path="/home" element={
           <Userprotected> <Home/> </Userprotected>
          } />
           <Route path="/users/logout" element={

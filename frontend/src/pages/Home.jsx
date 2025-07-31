@@ -5,17 +5,20 @@ import Locationsearchpanel from "../components/Locationsearchpanel";
 import Vehiclepanel from "../components/Vehiclepanle";
 import ConfirmRidePanel from "../components/ConfirmRidePanel";
 import LookingforDriver from "../components/LookingforDriver";
+import WaitingforDriver from "../components/WaitingforDriver";
 const Home = () => {
   const [panel, setPanel] = useState(false);
   const [vehiclepanelopen, setVehiclepanelopen] = useState(false);
   const [lookingforDriver, setLookingforDriver] = useState(false);
+  const [waitingforDriver, setWaitingforDriver] = useState(false);
   const [pickup, setPickup] = useState("");
   const [dest, setDest] = useState("");
   const panelref = useRef(null);
   const vehiclepanelref = useRef(null);
   const [confirmRidepanel, setConfirmRidepanel] = useState(false);
   const confirmRidepanelRef = useRef(null);
- const LookingforDriverref = useRef(null);
+  const LookingforDriverref = useRef(null);
+  const WaitingforDriverref = useRef(null);
   const SubmitHandler = (e) => {
     e.preventDefault();
   };
@@ -66,8 +69,6 @@ useGSAP(() => {
         height: "70%",
         duration:0.5,
          overflow: "auto",
-     
- 
       });
     } else {
       gsap.to(panelref.current, {
@@ -76,6 +77,19 @@ useGSAP(() => {
       });
     }
   }, [panel]);
+
+  useGSAP(() => {
+    if (waitingforDriver) {
+      gsap.to(WaitingforDriverref.current, {
+        transform: "translateY(0%)",
+        overflow: "auto",
+      });
+    } else {
+      gsap.to(WaitingforDriverref.current, {
+        transform: "translateY(100%)",
+      });
+    }
+  }, [waitingforDriver]);
 
   return (
     <div className="relative">
@@ -164,8 +178,12 @@ useGSAP(() => {
         <ConfirmRidePanel setConfirmRidepanel={setConfirmRidepanel} setLookingforDriver={setLookingforDriver}/>
       </div>
      <div  ref={LookingforDriverref} className="w-full bottom-0 h-auto bg-white p-2 fixed translate-y-full ">
-        <LookingforDriver setLookingforDriver={setLookingforDriver} />
+        <LookingforDriver setLookingforDriver={setLookingforDriver}   />
       </div>
+      <div  ref={WaitingforDriverref} className="w-full bottom-0 h-auto bg-white p-2 fixed translate-y-full ">
+        <WaitingforDriver setWaitingforDriver={setWaitingforDriver} />
+      </div>
+
     </div>
   );
 };

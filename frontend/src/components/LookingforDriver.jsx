@@ -3,6 +3,13 @@ import React from 'react'
 const LookingforDriver = (props) => {
   return (
     <div>
+      <h2
+        onClick={() => {
+          props.setLookingforDriver(false);
+        }}
+      >
+        <i className="ri-arrow-down-s-fill absolute right-10 top-4 text-2xl"></i>
+      </h2>
 
       <h2 className="text-xl pb-3 pl-1 pt-4 font-medium">Looking for a Driver</h2>
      <div className="flex -mt-3 flex-col items-center justify-center">
